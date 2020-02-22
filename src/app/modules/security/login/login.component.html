@@ -1,0 +1,15 @@
+<div class="login bg-dark" [hidden]="hidden">
+    <div class="login-container">
+        <h1><span [innerHTML]="title"></span></h1>
+        <form [formGroup]="loginForm">
+            <field-error-display [control]="loginForm.get('user')"></field-error-display>
+            <input type="text" class="form-control" [ngClass]="{'is-invalid': loginForm.get('user').invalid && loginForm.get('user').touched}" formControlName="user" placeholder="Usuario">
+            <field-error-display [control]="loginForm.get('password')"></field-error-display>
+            <input type="password" class="form-control" [ngClass]="{'is-invalid': loginForm.get('password').invalid  && loginForm.get('password').touched }" formControlName="password" placeholder="Password">
+            <button class="btn btn-lg btn-danger btn-block" (click)="login()">Accesar</button>
+        </form>
+        <div class="forgot-password">
+            <a (click)="forgotPassword()">Olivide mi contraseña</a>
+        </div>
+    </div>
+</div>

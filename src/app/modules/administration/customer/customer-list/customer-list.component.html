@@ -1,0 +1,92 @@
+<nav class="navbar navbar-light bg-light">
+    <div class="navbar-brand"><span class="icon fas fa-list"></span> <strong>Listado </strong> de clientes</div>
+    <div class="ml-auto">
+        <div class="input-group">
+            <div class="input-group-append">
+                <button class="btn btn-sm btn-success" (click)="newRecord()">Nuevo cliente</button>
+                <button class="btn btn-sm btn-secondary" (click)="toggleFilter()"><span
+                        class="fas fa-search"></span></button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="module">
+    <div class="card">
+        <div class="card-header" [hidden]="hideFilter">
+            <form>
+                <div class="form-row align-items-center">
+                    <div class="col-sm-3 my-1">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Razon social</div>
+                            </div>
+                            <input type="text" class="form-control" name="businessName"
+                                [(ngModel)]="filter.entity.business_name">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 my-1">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">R.F.C.</div>
+                            </div>
+                            <input type="text" class="form-control" name="tax_id" [(ngModel)]="filter.entity.tax_id">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 my-1">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Contacto</div>
+                            </div>
+                            <input type="text" class="form-control" name="contact" [(ngModel)]="filter.entity.contact">
+                        </div>
+                    </div>
+                    <div class="col-auto ml-auto my-1">
+                        <button type="submit" class="btn btn-sm btn-primary" (click)="setFilter()">Buscar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="card-body">
+            <ngb-pagination class="d-flex justify-content-end" [pageSize]="response.per_page"
+                [collectionSize]="response.total" [(page)]="response.current_page" [maxSize]="5" [rotate]="true"
+                [ellipses]="false" [boundaryLinks]="true" (pageChange)="pageChange($event)"></ngb-pagination>
+            <div class="table-responsive">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Razón social</th>
+                            <th scope="col">R.F.C.</th>
+                            <th scope="col">Contacto</th>
+                            <th scope="col">Correo electrónico</th>
+                            <th scope="col">Telefóno</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let customer of response.data">
+                            <th scope="row">{{ customer.business_name }}</th>
+                            <td>{{ customer.tax_id }}</td>
+                            <td>{{ customer.contact }}</td>
+                            <td>{{ customer.email }}</td>
+                            <td>{{ customer.telephone }}</td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Acciones">
+                                    <button class="btn btn-sm btn-primary"
+                                        (click)="openForm(customer, editMovement)"><span
+                                            class="fas fa-edit"></span></button>
+                                    <button class="btn btn-sm btn-danger" (click)="delete(customer)"><span
+                                            class="fas fa-trash"></span></button>
+                                </div>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <ngb-pagination class="d-flex justify-content-end" [pageSize]="response.per_page"
+                [collectionSize]="response.total" [(page)]="response.current_page" [maxSize]="5" [rotate]="true"
+                [ellipses]="false" [boundaryLinks]="true" (pageChange)="pageChange($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

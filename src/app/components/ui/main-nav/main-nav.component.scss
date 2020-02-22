@@ -1,0 +1,153 @@
+.icon {
+  margin-right: 10px;
+}
+
+.nav-link {
+  cursor: pointer;
+}
+
+div.toggler {
+  margin: 0 15px 0 0;
+
+  button {
+    color: #fff;
+    font-size: 25px;
+    padding: 0;
+  }
+}
+
+.navbar {
+  z-index: 100;
+}
+
+.navbar-brand {
+  margin: 0 5px;
+
+  span.logo {
+    margin-right: 15px;
+    font-size: 19px;
+  }
+}
+
+.main-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  padding: 63px 0 0 0;
+  color: #fff;
+  @media only screen and (max-width: 991px) {
+    -webkit-box-shadow: 5px 0px 15px 0px rgba(100, 100, 100, 1);
+    -moz-box-shadow: 5px 0px 15px 0px rgba(100, 100, 100, 1);
+    box-shadow: 5px 0px 15px 0px rgba(100, 100, 100, 1);
+    z-index: 99;
+  }
+}
+
+div.module {
+  padding: 0;
+  margin: 0;
+  //position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  div.filter {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 20px;
+    height: 55px;
+    background: #fff;
+    border-bottom: 1px solid #373a3c;
+  }
+
+  .navbar-brand {
+    .icon {
+      margin-right: 10px;
+    }
+  }
+
+  div.card {
+    margin: 20px;
+
+    div.pager {
+      width: 100%;
+
+      div.content {
+        float: right;
+      }
+    }
+  }
+}
+
+div.menued {
+  padding-left: 250px;
+
+  @media only screen and (max-width: 991px) {
+    padding-left: 0;
+  }
+}
+
+.module-menu {
+  padding: 5px 0 0 10px;
+
+  p {
+    margin-bottom: 0;
+    font-size: 16px;
+    font-weight: 300;
+    display: inline-block;
+    width: 100%;
+    text-decoration: none;
+    position: relative;
+    padding: 8px 0 0 10px;
+    cursor: pointer;
+  }
+  p::after {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f105";
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    background: 0 0;
+    position: absolute;
+    right: 18px;
+    top: 8px;
+    transform: rotate(0deg);
+    transition: transform .3s ease,-webkit-transform .3s ease;
+  }
+
+  p.active::after {
+    transform: rotate(90deg);
+    transition: transform .3s ease,-webkit-transform .3s ease;
+  }
+
+  ul {
+    padding: 0;
+    margin: 0 0 0 20px;
+    list-style: none;
+
+    li {
+      a {
+        color: #fff;
+        font-size: 14px;
+        margin: 10px;
+        font-weight: 300;
+        display: block;
+        cursor: pointer;
+      }
+
+      a:hover {
+        color: #d2d2d2;
+        text-decoration: none;
+      }
+    }
+  }
+}

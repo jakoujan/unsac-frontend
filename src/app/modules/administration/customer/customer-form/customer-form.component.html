@@ -1,0 +1,129 @@
+<div class="modal-header text-light bg-dark">
+    <p class="modal-title">Datos del cliente</p>
+</div>
+<div class="modal-body">
+    <div class="card">
+        <div class="card-header">
+            Datos generales
+        </div>
+        <div class="card-body">
+            <form [formGroup]="generalDataForm">
+                <div class="form-row">
+                    <div class="form-group col-12">
+                        <label for="business_name">Razón social</label>
+                        <input type="text" class="form-control" name="business_name" formControlName="business_name"
+                            [ngClass]="{'is-invalid': generalDataForm.get('business_name').invalid && generalDataForm.get('business_name').touched}">
+                        <field-error-display [control]="generalDataForm.get('business_name')"></field-error-display>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-6">
+                        <label for="tax_id">R.F.C.</label>
+                        <input type="text" class="form-control" name="tax_id" formControlName="tax_id"
+                            [ngClass]="{'is-invalid': generalDataForm.get('tax_id').invalid && generalDataForm.get('tax_id').touched}">
+                        <field-error-display [control]="generalDataForm.get('tax_id')"></field-error-display>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="inputPassword">Contacto</label>
+                        <input type="text" class="form-control" name="contact" formControlName="contact"
+                            [ngClass]="{'is-invalid': generalDataForm.get('contact').invalid && generalDataForm.get('contact').touched}">
+                        <field-error-display [control]="generalDataForm.get('contact')"></field-error-display>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-6">
+                        <label for="inputPassword">Teléfono</label>
+                        <input type="text" class="form-control" name="telephone" formControlName="telephone"
+                            [ngClass]="{'is-invalid': generalDataForm.get('telephone').invalid && generalDataForm.get('telephone').touched}">
+                        <field-error-display [control]="generalDataForm.get('telephone')"></field-error-display>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="inputPassword">Correo electrónico</label>
+                        <input type="email" class="form-control" name="email" formControlName="email"
+                            [ngClass]="{'is-invalid': generalDataForm.get('email').invalid && generalDataForm.get('email').touched}">
+                        <field-error-display [control]="generalDataForm.get('email')"></field-error-display>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="card separator-t-20">
+        <div class="card-header">
+            Dirección
+        </div>
+        <div class="card-body">
+            <form [formGroup]="addressForm">
+                <div class="form-row">
+                    <div class="form-group col-6">
+                        <label for="street">Calle</label>
+                        <input type="text" class="form-control" name="street" formControlName="street"
+                            [ngClass]="{'is-invalid': addressForm.get('street').invalid && addressForm.get('street').touched}">
+                        <field-error-display [control]="addressForm.get('street')"></field-error-display>
+                    </div>
+                    <div class="form-group col-3">
+                        <label for="internal_number">Numero interior</label>
+                        <input type="text" class="form-control" name="internal_number" formControlName="internal_number"
+                            [ngClass]="{'is-invalid': addressForm.get('internal_number').invalid && addressForm.get('internal_number').touched}">
+                        <field-error-display [control]="addressForm.get('internal_number')"></field-error-display>
+                    </div>
+                    <div class="form-group col-3">
+                        <label for="external_number">Numero exterior</label>
+                        <input type="text" class="form-control" name="external_number" formControlName="external_number"
+                            [ngClass]="{'is-invalid': addressForm.get('external_number').invalid && addressForm.get('external_number').touched}">
+                        <field-error-display [control]="addressForm.get('external_number')"></field-error-display>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="tax_id">Colonia</label>
+                        <input type="settlement" class="form-control" name="settlement" formControlName="settlement"
+                            [ngClass]="{'is-invalid': addressForm.get('settlement').invalid && addressForm.get('settlement').touched}">
+                        <field-error-display [control]="addressForm.get('settlement')"></field-error-display>
+                    </div>
+                    <div class="form-group col">
+                        <label for="city">Ciudad</label>
+                        <input type="text" class="form-control" name="city" formControlName="city"
+                            [ngClass]="{'is-invalid': addressForm.get('city').invalid && addressForm.get('city').touched}">
+                        <field-error-display [control]="addressForm.get('city')"></field-error-display>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="county">Municipio</label>
+                        <input type="text" class="form-control" name="county" formControlName="county"
+                            [ngClass]="{'is-invalid': addressForm.get('county').invalid && addressForm.get('county').touched}">
+                        <field-error-display [control]="addressForm.get('county')"></field-error-display>
+                    </div>
+                    <div class="form-group col">
+                        <label for="state">Estado</label>
+                        <select name="state" class="form-control" formControlName="state"
+                            [ngClass]="{'is-invalid': addressForm.get('state').invalid && addressForm.get('state').touched}">
+                            <option [ngValue]="state.id" *ngFor="let state of states">{{state.description}}</option>
+                        </select>
+                        <field-error-display [control]="addressForm.get('state')"></field-error-display>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="postal_code">Codigo postal</label>
+                        <input type="text" class="form-control" name="postal_code" formControlName="postal_code"
+                            [ngClass]="{'is-invalid': addressForm.get('postal_code').invalid && addressForm.get('postal_code').touched}">
+                        <field-error-display [control]="addressForm.get('postal_code')"></field-error-display>
+                    </div>
+                    <div class="form-group col">
+                        <label for="country">Pais</label>
+                        <select name="country" class="form-control" formControlName="country"
+                            [ngClass]="{'is-invalid': addressForm.get('country').invalid && addressForm.get('country').touched}">
+                            <option [ngValue]="country.id" *ngFor="let country of countries">{{country.description}}</option>
+                        </select>
+                        <field-error-display [control]="addressForm.get('country')"></field-error-display>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-sm btn-success" [disabled]="form.invalid" (click)="save()">Guardar</button>
+    <button type="button" class="btn btn-sm btn-secondary" (click)="activeModal.dismiss()">Cancelar</button>
+</div>

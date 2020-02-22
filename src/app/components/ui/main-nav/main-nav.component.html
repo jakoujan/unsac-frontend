@@ -1,0 +1,43 @@
+<div class="app-container">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-danger">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a (click)="toggleMenu()" class="nav-link">
+                    <span class="fas fa-bars fa-lg"></span>
+                </a>
+            </li>
+        </ul>
+        <div class="navbar-brand"><span class="fas fa-balance-scale logo"></span> <span [innerHTML]="title"></span>
+        </div>
+        <div [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="navbar-text">
+                    {{ user | user }}
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" (click)="dashboard()"><span class="fas fa-chart-line fa-lg"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" (click)="profile()"><span class="fas fa-id-card fa-lg"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" (click)="logout()"><span class="fas fa-sign-out-alt fa-lg"></span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="module" [ngClass]="{menued: !isMenuHidden}">
+        <router-outlet></router-outlet>
+    </div>
+    <nav [ngbCollapse]="isMenuHidden" class="main-menu navbar-dark bg-dark">
+        <div class="module-menu" *ngFor="let module of modules">
+            <p (click)="openModule(module)" [ngClass]="{active: module.opened}">{{ module.title }}</p>
+            <ul [hidden]="!module.opened">
+                <li *ngFor="let submodule of module.submodules"><a (click)="activate(submodule)">{{ submodule.name }}</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<ngx-spinner bdColor="rgba(0,0,0,0.45)" size="medium" color="#fff" type="ball-clip-rotate-multiple"
+    [fullScreen]="false">
+</ngx-spinner>

@@ -1,0 +1,14 @@
+div.message {
+    cursor: pointer;
+    border: 1px solid #777;
+    padding: 20px;
+    margin-bottom: 20px;
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+div.not-read {
+    font-weight: 700 !important;
+}
