@@ -1,0 +1,81 @@
+<div class="modal-header text-light bg-dark">
+    <p class="modal-title">Datos del instructor</p>
+</div>
+<div class="modal-body">
+    <div class="card">
+        <div class="card-header">
+            Datos generales
+        </div>
+        <div class="card-body">
+            <form [formGroup]="generalDataForm">
+                <div class="form-row">
+                    <div class="form-group col-12">
+                        <label for="business_name">Nombre</label>
+                        <input type="text" class="form-control" name="name" formControlName="name"
+                            [ngClass]="{'is-invalid': generalDataForm.get('name').invalid && generalDataForm.get('name').touched}">
+                        <field-error-display [control]="generalDataForm.get('name')"></field-error-display>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-12">
+                        <label for="inputPassword">Correo electrónico</label>
+                        <input type="email" class="form-control" name="email" formControlName="email"
+                            [ngClass]="{'is-invalid': generalDataForm.get('email').invalid && generalDataForm.get('email').touched}">
+                        <field-error-display [control]="generalDataForm.get('email')"></field-error-display>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="card separator-t-20">
+        <div class="card-header">
+            Certificaciones
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-6">
+                    <div class="list-group" cdkDropList #certificatedCourses="cdkDropList" [cdkDropListData]="cc"
+                        [cdkDropListConnectedTo]="[availableCourses]" (cdkDropListDropped)="drop($event)">
+                        <div class="list-group-item active">Cursos certificados del instructor</div>
+                        <div class="list-group-item list-group-item-light">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <span class="fas fa-search"></span>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Filtro" aria-label="Filtro"
+                                    aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <a class="list-group-item list-group-item-action" *ngFor="let item of cc"
+                            cdkDrag>{{ item.title }}</a>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="list-group" cdkDropList #availableCourses="cdkDropList" [cdkDropListData]="ac"
+                        [cdkDropListConnectedTo]="[certificatedCourses]" (cdkDropListDropped)="drop($event)">
+                        <div class="list-group-item active">Cursos disponibles</div>
+                        <div class="list-group-item list-group-item-light">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <span class="fas fa-search"></span>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Filtro" aria-label="Filtro"
+                                    aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <a class="list-group-item list-group-item-action" *ngFor="let item of ac"
+                            cdkDrag>{{ item.title }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-sm btn-success" [disabled]="form.invalid" (click)="save()">Guardar</button>
+    <button type="button" class="btn btn-sm btn-secondary" (click)="activeModal.dismiss()">Cancelar</button>
+</div>

@@ -47,15 +47,15 @@ export class MainNavComponent implements OnInit, OnDestroy {
   @HostListener('window:resize', ['$event'])
   getScreenSize(event?) {
     this.screenWidth = window.innerWidth;
-    if(this.screenWidth <= 1367) {
+    if (this.screenWidth <= 1367) {
       this.isMenuHidden = true;
     }
   }
 
   private buildMenu(permissions: Array<IModule>): Array<Module> {
     const modules: Array<Module> = [];
-
-    MODULES.forEach(module => {
+    const mods = MODULES.map(a => ({ ...a }));
+    mods.forEach(module => {
       let permission: IModule;
       if (permissions.some(p => {
         permission = p;
@@ -97,7 +97,7 @@ export class MainNavComponent implements OnInit, OnDestroy {
     this.router.navigate(['/login']);
   }
 
-  public dashboard() {
+  public general() {
     this.router.navigate(['/dashboard']);
   }
   public profile() {

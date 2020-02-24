@@ -1,7 +1,7 @@
 import { Action } from './action';
 
 export interface Permission {
-    id:string;
+    id: string;
     name: string;
     submodules: Array<Action>;
 }

@@ -2,24 +2,32 @@ import { Module } from './components/ui/main-nav/module';
 
 export const MODULES: Array<Module> = [
   {
-    title: 'Casos',
+    title: 'Agenda',
     icon: 'fas fa-fw fa-sliders-h',
-    id: 'cases',
+    id: 'schedule',
     submodules: [
       {
-        name: 'Nuevo',
-        id: 'new-case',
-        uri: 'cases/new',
+        name: 'Asignación',
+        id: 'assignment',
+        uri: 'assignment',
         icon: 'fas fa-fw fa-user-tie',
         default: true,
         active: false
       },
       {
-        name: 'Editar',
-        id: 'edit-case',
-        uri: 'cases/edit',
+        name: 'Modificación',
+        id: 'edit-assignment',
+        uri: 'assignment/edit',
         icon: 'fas fa-fw fa-user',
-        default: true,
+        default: false,
+        active: false
+      },
+      {
+        name: 'Logistica',
+        id: 'logistic',
+        uri: 'assignment/logistic',
+        icon: 'fas fa-fw fa-user',
+        default: false,
         active: false
       }
     ],
@@ -43,11 +51,26 @@ export const MODULES: Array<Module> = [
         id: 'users',
         uri: 'administration/users',
         icon: 'fas fa-fw fa-user',
-        default: true,
+        default: false,
+        active: false
+      },
+      {
+        name: 'Instructores',
+        id: 'instructors',
+        uri: 'administration/instructors',
+        icon: 'fas fa-fw fa-user',
+        default: false,
+        active: false
+      },
+      {
+        name: 'Cursos',
+        id: 'courses',
+        uri: 'administration/courses',
+        icon: 'fas fa-fw fa-user',
+        default: false,
         active: false
       }
     ],
     opened: false
   }
-
 ];

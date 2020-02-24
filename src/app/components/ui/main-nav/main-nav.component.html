@@ -7,7 +7,7 @@
                 </a>
             </li>
         </ul>
-        <div class="navbar-brand"><span class="fas fa-balance-scale logo"></span> <span [innerHTML]="title"></span>
+        <div class="navbar-brand"><span class="far fa-calendar-alt logo"></span> <span [innerHTML]="title"></span>
         </div>
         <div [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
@@ -15,7 +15,7 @@
                     {{ user | user }}
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" (click)="dashboard()"><span class="fas fa-chart-line fa-lg"></span></a>
+                    <a class="nav-link" (click)="general()"><span class="fas fa-calendar-alt fa-lg"></span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" (click)="profile()"><span class="fas fa-id-card fa-lg"></span></a>

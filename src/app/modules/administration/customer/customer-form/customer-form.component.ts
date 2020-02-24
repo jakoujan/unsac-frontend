@@ -3,7 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ICustomer } from 'src/app/interfaces/customer';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Item } from 'src/app/interfaces/item';
-import { STATES, COUNTRIES } from "src/app/catalogs/catalogs";
+import { STATES, COUNTRIES } from 'src/app/catalogs/catalogs';
 @Component({
   selector: 'app-customer-form',
   templateUrl: './customer-form.component.html',
@@ -68,9 +68,4 @@ export class CustomerFormComponent implements OnInit {
     this.customer.country = this.addressForm.controls.country.value;
     this.activeModal.close(this.customer);
   }
-
-
-
-
-
 }

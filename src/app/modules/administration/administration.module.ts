@@ -8,6 +8,9 @@ import { CommonModule } from '@angular/common';
 import { UiModule } from 'src/app/components/ui/ui.module';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { UserFormComponent } from './user/user-form/user-form.component';
+import { InstructorListComponent } from './instructor/instructor-list/instructor-list.component';
+import { InstructorFormComponent } from './instructor/instructor-form/instructor-form.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 
@@ -16,7 +19,9 @@ import { UserFormComponent } from './user/user-form/user-form.component';
     CustomerListComponent,
     CustomerFormComponent,
     UserListComponent,
-    UserFormComponent
+    UserFormComponent,
+    InstructorListComponent,
+    InstructorFormComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +29,8 @@ import { UserFormComponent } from './user/user-form/user-form.component';
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    UiModule
+    UiModule,
+    DragDropModule
   ],
   entryComponents: [
     CustomerFormComponent,

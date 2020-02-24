@@ -14,7 +14,7 @@ export const constants = {
   LOGIN_OK: 200,
   LOGIN_NOT_OK: 403,
   TOKEN_VALUE: 'token',
-  APPLICATION_TITLE: '<strong>Auto</strong>case',
+  APPLICATION_TITLE: '<strong>UNIPROTEC</strong> UNSAC',
   APPLICATION_TITLE_ALT: 'Autocase',
   CONFIRMATION_DIALOG_TITLE: 'Confirmar acción'
 };

@@ -18,14 +18,13 @@ export class SecurityService extends Service {
 
   private accessorEmitter: Subject<IUser> = new Subject<IUser>();
 
-  constructor(private http: HttpClient, private spinner: NgxSpinnerService, private toastService: ToastService,
-    private persistenceService: PersistenceService) {
-    super();
-    this.setPersistentService(this.persistenceService);
+  constructor(protected http: HttpClient, protected spinner: NgxSpinnerService,
+    protected toastService: ToastService,
+    protected persistenceService: PersistenceService) {
+    super(http, persistenceService, spinner, toastService);
   }
 
   public login(user: IUser): Promise<IResponse> {
-    this.spinner.show();
     return new Promise<IResponse>(resolve => {
       this.http.post<IResponse>(Service.getApiUrl(SecurityService.LOGIN), user, this.getOptions()).subscribe(response => {
         this.spinner.hide();
@@ -36,7 +35,7 @@ export class SecurityService extends Service {
         const response: IResponse = {
           code: 505,
           fields: null,
-          message: "Error el servicio no esta disponible",
+          message: 'Error el servicio no esta disponible',
           status: ''
         }
         resolve(response);
@@ -64,7 +63,7 @@ export class SecurityService extends Service {
         const response: IResponse = {
           code: 505,
           fields: null,
-          message: "Error el servicio no esta disponible",
+          message: 'Error el servicio no esta disponible',
           status: ''
         }
         resolve(response);

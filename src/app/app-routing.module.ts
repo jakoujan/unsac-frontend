@@ -5,6 +5,7 @@ import { CustomerListComponent } from './modules/administration/customer/custome
 import { LoginComponent } from './modules/security/login/login.component';
 import { SessionGuard } from './guards/session.guard';
 import { UserListComponent } from './modules/administration/user/user-list/user-list.component';
+import { InstructorListComponent } from './modules/administration/instructor/instructor-list/instructor-list.component';
 
 
 const routes: Routes = [
@@ -29,6 +30,13 @@ const routes: Routes = [
       validate: true,
       module: 'administration',
       id: 'users'
+    }
+  },
+  {
+    path: 'administration/instructors', component: InstructorListComponent, canActivate: [SessionGuard], data: {
+      validate: true,
+      module: 'administration',
+      id: 'instructors'
     }
   }
 ];

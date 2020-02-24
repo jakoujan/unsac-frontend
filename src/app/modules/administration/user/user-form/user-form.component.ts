@@ -3,8 +3,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { IUser } from 'src/app/interfaces/user';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Item } from 'src/app/interfaces/item';
-import { STATES, COUNTRIES } from "src/app/catalogs/catalogs";
-import { MODULES } from "src/app/modules";
+import { STATES, COUNTRIES } from 'src/app/catalogs/catalogs';
+import { MODULES } from 'src/app/modules';
 import { Permission } from './permission';
 import { buildFormPermissions, buildUserPermissions } from 'src/app/helpers/helpers';
 import { validateName } from 'src/app/helpers/validation-helpers';
@@ -24,7 +24,7 @@ export class UserFormComponent implements OnInit {
   modulesForm: FormGroup;
   states: Array<Item> = STATES;
   countries: Array<Item> = COUNTRIES;
-  modules: any = MODULES
+  modules: any = MODULES.map(a => ({ ...a }));
   permissions: Array<Permission> = [];
 
 
@@ -38,7 +38,7 @@ export class UserFormComponent implements OnInit {
         name: [this.user.name, Validators.required],
         email: [this.user.email, Validators.compose([Validators.required, Validators.email])],
       });
-      if (this.user.id != 0) {
+      if (this.user.id !== 0) {
         this.generalDataForm.controls.user.disable();
       }
       this.permissions = buildFormPermissions(this.modules, this.user.modules);

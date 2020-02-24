@@ -18,11 +18,11 @@ export function validateProfile(data: any, modules: Array<IModule>): boolean {
 export function buildFormPermissions(modules: Array<Module>, permissions: Array<IModule>): Array<Permission> {
     const options: Array<Permission> = [];
     modules.forEach(module => {
-        let option: Permission = {
+        const option: Permission = {
             id: module.id,
             name: module.title,
             submodules: []
-        }
+        };
         let pm;
         if (permissions) {
             pm = permissions.find(p => p.id === module.id);
@@ -33,29 +33,28 @@ export function buildFormPermissions(modules: Array<Module>, permissions: Array<
             if (pm) {
                 psm = pm.submodules.find(pms => pms.id === submodule.id);
             }
-            let sm: Action = {
+            const sm: Action = {
                 id: submodule.id,
                 name: submodule.name,
                 access: psm !== undefined,
                 write: psm ? psm.write : false
-
-            }
+            };
             option.submodules.push(sm);
-        })
+        });
         options.push(option);
     });
     return options;
 }
 
 export function buildUserPermissions(permissions: Array<Permission>): Array<IModule> {
-    let modules: Array<IModule> = [];
+    const modules: Array<IModule> = [];
     permissions.forEach(permission => {
         const sms = permission.submodules.filter(sm => sm.access);
         if (sms.length) {
             const module: IModule = {
                 id: permission.id,
                 submodules: []
-            }
+            };
             sms.forEach(sm => {
                 module.submodules.push({
                     id: sm.id,

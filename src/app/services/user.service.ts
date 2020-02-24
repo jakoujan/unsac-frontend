@@ -21,75 +21,25 @@ export class UserService extends Service {
 
 
 
-  constructor(private http: HttpClient, private spinner: NgxSpinnerService, private persistenceService: PersistenceService,
-    private toastService: ToastService) {
-    super();
-    this.setPersistentService(this.persistenceService);
+  constructor(protected http: HttpClient, protected spinner: NgxSpinnerService, protected persistenceService: PersistenceService,
+    protected toastService: ToastService) {
+    super(http, persistenceService, spinner, toastService);
   }
 
   public filter(filter: IUserFilter): Promise<IResponse> {
-    this.spinner.show();
-    return new Promise<IResponse>(resolve => {
-      const params = [{
-        name: 'page',
-        value: filter.page
-      }];
-      this.http.post<IResponse>(Service.getApiUrl(UserService.USER_LIST, params), Service.prepareFilter(filter), this.getOptions()).subscribe(response => {
-        this.spinner.hide();
-        resolve(response as unknown as IResponse);
-      }, err => {
-        this.spinner.hide();
-        this.toastService.show('Error al procesar la petición', { classname: 'bg-danger text-light', delay: 10000 });
-        const response: IResponse = {
-          code: 505,
-          fields: null,
-          message: "Error el servicio no esta disponible",
-          status: ''
-        }
-        resolve(response);
-      });
-    });
+    const params = [{
+      name: 'page',
+      value: filter.page
+    }];
+    return this.preparePromiseFilterPost(UserService.USER_LIST, filter, params);
   }
 
   public save(user: IUser): Promise<IResponse> {
-    this.spinner.show();
-    return new Promise<IResponse>(resolve => {
-      this.http.post<IResponse>(Service.getApiUrl(UserService.USER_SAVE), Service.prepareEntity(user), this.getOptions()).subscribe(response => {
-        this.spinner.hide();
-        resolve(response as unknown as IResponse);
-      }, err => {
-        this.spinner.hide();
-        this.toastService.show('Error al procesar la petición', { classname: 'bg-danger text-light', delay: 10000 });
-        const response: IResponse = {
-          code: 505,
-          fields: null,
-          message: "Error el servicio no esta disponible",
-          status: ''
-        }
-        resolve(response);
-      });
-    });
+    return this.preparePromiseEntityPost(UserService.USER_SAVE, user);
   }
 
   public delete(user: IUser): Promise<IResponse> {
-    this.spinner.show();
-    return new Promise<IResponse>(resolve => {
-
-      this.http.post<IResponse>(Service.getApiUrl(UserService.USER_DELETE), Service.prepareEntity(user), this.getOptions()).subscribe(response => {
-        this.spinner.hide();
-        resolve(response as unknown as IResponse);
-      }, err => {
-        this.spinner.hide();
-        this.toastService.show('Error al procesar la petición', { classname: 'bg-danger text-light', delay: 10000 });
-        const response: IResponse = {
-          code: 505,
-          fields: null,
-          message: "Error el servicio no esta disponible",
-          status: ''
-        }
-        resolve(response);
-      });
-    });
+    return this.preparePromiseEntityPost(UserService.USER_DELETE, user);
   }
 
   public isNameExists(user: string): Observable<HttpEvent<IResponse>> {

@@ -18,75 +18,24 @@ export class CustomerService extends Service {
   private static CUSTOMER_DELETE = '/api/customers/delete';
 
 
-  constructor(private http: HttpClient, private spinner: NgxSpinnerService, private persistenceService: PersistenceService,
-    private toastService: ToastService) {
-    super();
-    this.setPersistentService(this.persistenceService);
+  constructor(protected http: HttpClient, protected spinner: NgxSpinnerService, protected persistenceService: PersistenceService,
+              protected toastService: ToastService) {
+    super(http, persistenceService, spinner, toastService);
   }
 
   public filter(filter: ICustomerFilter): Promise<IResponse> {
-    this.spinner.show();
-    return new Promise<IResponse>(resolve => {
-      const params = [{
-        name: 'page',
-        value: filter.page
-      }];
-      this.http.post<IResponse>(Service.getApiUrl(CustomerService.CUSTOMER_LIST, params), Service.prepareFilter(filter), this.getOptions()).subscribe(response => {
-        this.spinner.hide();
-        resolve(response as unknown as IResponse);
-      }, err => {
-        this.spinner.hide();
-        this.toastService.show('Error al procesar la petición', { classname: 'bg-danger text-light', delay: 10000 });
-        const response: IResponse = {
-          code: 505,
-          fields: null,
-          message: "Error el servicio no esta disponible",
-          status: ''
-        }
-        resolve(response);
-      });
-    });
+    const params = [{
+      name: 'page',
+      value: filter.page
+    }];
+    return this.preparePromiseFilterPost(CustomerService.CUSTOMER_LIST, filter, params);
   }
 
   public save(customer: ICustomer): Promise<IResponse> {
-    this.spinner.show();
-    return new Promise<IResponse>(resolve => {
-      this.http.post<IResponse>(Service.getApiUrl(CustomerService.CUSTOMER_SAVE), Service.prepareEntity(customer), this.getOptions()).subscribe(response => {
-        this.spinner.hide();
-        resolve(response as unknown as IResponse);
-      }, err => {
-        this.spinner.hide();
-        this.toastService.show('Error al procesar la petición', { classname: 'bg-warning text-light', delay: 10000 });
-        const response: IResponse = {
-          code: 505,
-          fields: null,
-          message: "Error el servicio no esta disponible",
-          status: ''
-        }
-        resolve(response);
-      });
-    });
+    return this.preparePromiseEntityPost(CustomerService.CUSTOMER_SAVE, customer);
   }
 
   public delete(customer: ICustomer): Promise<IResponse> {
-    this.spinner.show();
-    return new Promise<IResponse>(resolve => {
-      this.http.post<IResponse>(Service.getApiUrl(CustomerService.CUSTOMER_DELETE), Service.prepareEntity(customer), this.getOptions()).subscribe(response => {
-        this.spinner.hide();
-        resolve(response as unknown as IResponse);
-      }, err => {
-        this.spinner.hide();
-        this.toastService.show('Error al procesar la petición', { classname: 'bg-warning text-light', delay: 10000 });
-        const response: IResponse = {
-          code: 505,
-          fields: null,
-          message: "Error el servicio no esta disponible",
-          status: ''
-        }
-        resolve(response);
-      });
-    });
+    return this.preparePromiseEntityPost(CustomerService.CUSTOMER_DELETE, customer);
   }
-
-
 }
