@@ -1,9 +1,9 @@
 <nav class="navbar navbar-light bg-light">
-    <div class="navbar-brand"><span class="icon fas fa-list"></span> <strong>Listado </strong> de usuarios</div>
+    <div class="navbar-brand"><span class="icon fas fa-list"></span> <strong>Listado </strong> de cursos</div>
     <div class="ml-auto">
         <div class="input-group">
             <div class="input-group-append">
-                <button class="btn btn-sm btn-success" (click)="newRecord()">Nuevo usuario</button>
+                <button class="btn btn-sm btn-success" (click)="newRecord()">Nuevo curso</button>
                 <button class="btn btn-sm btn-secondary" (click)="toggleFilter()"><span
                         class="fas fa-search"></span></button>
             </div>
@@ -19,17 +19,9 @@
                     <div class="col-sm-3 my-1">
                         <div class="input-group input-group-sm">
                             <div class="input-group-prepend">
-                                <div class="input-group-text">Usuario</div>
-                            </div>
-                            <input type="text" class="form-control" name="user" [(ngModel)]="filter.entity.username">
-                        </div>
-                    </div>
-                    <div class="col-sm-3 my-1">
-                        <div class="input-group input-group-sm">
-                            <div class="input-group-prepend">
                                 <div class="input-group-text">Nombre</div>
                             </div>
-                            <input type="text" class="form-control" name="name" [(ngModel)]="filter.entity.name">
+                            <input type="text" class="form-control" name="name" [(ngModel)]="filter.entity.title">
                         </div>
                     </div>
                     <div class="col-auto ml-auto my-1">
@@ -46,22 +38,18 @@
                 <table class="table table-hover table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">Usuario</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Correo electrónico</th>
+                            <th scope="col">Titulo del curso</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let user of response.data">
-                            <th scope="row">{{ user.user }}</th>
-                            <td>{{ user.name }}</td>
-                            <td>{{ user.email }}</td>
+                        <tr *ngFor="let course of response.data">
+                            <th scope="row">{{ course.title }}</th>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Acciones">
-                                    <button class="btn btn-sm btn-primary" (click)="openForm(user, editMovement)"><span
+                                    <button class="btn btn-sm btn-primary" (click)="openForm(course, editMovement)"><span
                                             class="fas fa-edit"></span></button>
-                                    <button class="btn btn-sm btn-danger" (click)="delete(user)"><span
+                                    <button class="btn btn-sm btn-danger" (click)="delete(course)"><span
                                             class="fas fa-trash"></span></button>
                                 </div>
                             </td>

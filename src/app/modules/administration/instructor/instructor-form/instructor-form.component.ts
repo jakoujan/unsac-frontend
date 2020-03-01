@@ -15,17 +15,19 @@ export class InstructorFormComponent implements OnInit {
   form: FormGroup;
   generalDataForm: FormGroup;
   addressForm: FormGroup;
+  ccFilter: string = '';
+  acFilter: string = '';
 
   cc = [
     { id: 1, title: 'Curso 1' },
-    { id: 2, title: 'Curso 2' }
+    { id: 2, title: 'Curso 2' },
+    { id: 5, title: 'Curso 5' },
+    { id: 6, title: 'Curso 6' }
   ];
 
   ac = [
     { id: 3, title: 'Curso 3' },
     { id: 4, title: 'Curso 4' },
-    { id: 5, title: 'Curso 5' },
-    { id: 6, title: 'Curso 6' },
     { id: 7, title: 'Curso 7' },
     { id: 8, title: 'Curso 8' },
     { id: 9, title: 'Curso 9' },
@@ -67,6 +69,15 @@ export class InstructorFormComponent implements OnInit {
         event.previousIndex,
         event.currentIndex);
     }
+  }
+
+  public get acc() {
+    const f = this.acFilter.toLowerCase();
+    return f ? this.ac.filter(item => item.title.toLowerCase().indexOf(f) >= 0) : this.ac;
+  }
+  public get ccc() {
+    const f = this.ccFilter.toLowerCase();
+    return f ? this.cc.filter(item => item.title.toLowerCase().indexOf(f) >= 0) : this.cc;
   }
 
 }

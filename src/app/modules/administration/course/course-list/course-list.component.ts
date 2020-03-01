@@ -2,21 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { EMovement } from 'src/app/enums/movement.enum';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DialogService } from 'src/app/components/ui/dialogs/dialog.service';
-import { IInstructor } from 'src/app/interfaces/instructor';
-import { InstructorService } from 'src/app/services/instructor.service';
+import { ICourse } from 'src/app/interfaces/course';
+import { CourseService } from 'src/app/services/course.service';
 import { IResposeData } from 'src/app/interfaces/response-data';
-import { IInstructorFilter } from 'src/app/filters/instructor-filter';
+import { ICourseFilter } from 'src/app/filters/course-filter';
 import { constants } from 'src/environments/environment';
-import { InstructorFormComponent } from '../instructor-form/instructor-form.component';
+import { CourseFormComponent } from '../course-form/course-form.component';
 
 @Component({
-  selector: 'app-instructor-list',
-  templateUrl: './instructor-list.component.html',
-  styleUrls: ['./instructor-list.component.scss']
+  selector: 'app-course-list',
+  templateUrl: './course-list.component.html',
+  styleUrls: ['./course-list.component.scss']
 })
-export class InstructorListComponent implements OnInit {
+export class CourseListComponent implements OnInit {
 
-  response: IResposeData<Array<IInstructor>> = {
+  response: IResposeData<Array<ICourse>> = {
     current_page: 1,
     data: [],
     from: 0,
@@ -26,12 +26,10 @@ export class InstructorListComponent implements OnInit {
     total: 0
   };
 
-  filter: IInstructorFilter = {
+  filter: ICourseFilter = {
     entity: {
       id: null,
-      name: null,
-      email: null,
-      courses: null
+      title: null
     },
     startDate: null,
     endDate: null,
@@ -42,25 +40,23 @@ export class InstructorListComponent implements OnInit {
   hideFilter: boolean = true;
   editMovement: EMovement = EMovement.EDIT;
 
-  constructor(private modalService: NgbModal, private instructorService: InstructorService, private dialog: DialogService) { }
+  constructor(private modalService: NgbModal, private courseService: CourseService, private dialog: DialogService) { }
 
   ngOnInit() {
     this.setFilter();
   }
 
   public newRecord() {
-    const instructor: IInstructor = {
+    const course: ICourse = {
       id: 0,
-      name: null,
-      email: null, 
-      courses: []
+      title: null
     };
 
-    this.openForm(instructor, EMovement.NEW);
+    this.openForm(course, EMovement.NEW);
   }
 
-  public edit(instructor: IInstructor) {
-    this.openForm(instructor, EMovement.EDIT);
+  public edit(course: ICourse) {
+    this.openForm(course, EMovement.EDIT);
   }
 
   public pageChange(page: number) {
@@ -69,17 +65,17 @@ export class InstructorListComponent implements OnInit {
   }
 
   setFilter() {
-    this.instructorService.filter(this.filter).then(response => {
+    this.courseService.filter(this.filter).then(response => {
       this.response = response.fields.response_data;
     });
   }
 
-  public delete(instructor: IInstructor) {
+  public delete(course: ICourse) {
 
-    this.dialog.confirm(constants.CONFIRMATION_DIALOG_TITLE, 'Realmente desea eliminar a este usuario: ' + instructor + '?')
+    this.dialog.confirm(constants.CONFIRMATION_DIALOG_TITLE, 'Realmente desea eliminar a este usuario: ' + course + '?')
       .then((confirmed) => {
         if (confirmed) {
-          this.instructorService.delete(instructor).then(response => {
+          this.courseService.delete(course).then(response => {
             this.dialog.show(constants.CONFIRMATION_DIALOG_TITLE, response.message);
             this.setFilter();
           });
@@ -91,16 +87,16 @@ export class InstructorListComponent implements OnInit {
     this.hideFilter = !this.hideFilter;
   }
 
-  public openForm(instructor: IInstructor, movement: EMovement) {
-    const modalRef = this.modalService.open(InstructorFormComponent, { size: 'xl', centered: true, scrollable: true });
-    modalRef.componentInstance.instructor = instructor;
+  public openForm(course: ICourse, movement: EMovement) {
+    const modalRef = this.modalService.open(CourseFormComponent, { size: 'xl', centered: true, scrollable: true });
+    modalRef.componentInstance.course = course;
     modalRef.result.then(usr => {
-      this.instructorService.save(instructor).then(response => {
+      this.courseService.save(course).then(response => {
         if (movement === EMovement.NEW) {
           this.response.data.push(usr);
           this.dialog.show(constants.CONFIRMATION_DIALOG_TITLE, response.message + ' Password de acceso: ' + response.fields.password);
         } else if (movement === EMovement.EDIT) {
-          instructor = usr;
+          course = usr;
           this.dialog.show(constants.CONFIRMATION_DIALOG_TITLE, response.message);
         }
       });

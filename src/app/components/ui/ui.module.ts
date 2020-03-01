@@ -9,6 +9,7 @@ import { LeadingZerosPipe } from './pipes/leading-zeros.pipe';
 import { UserPipe } from './pipes/user.pipe';
 import { BooleanPipe } from './pipes/boolean.pipe';
 import { MessageDialogComponent } from './dialogs/message-dialog/message-dialog.component';
+import { CoursesPipe } from './pipes/courses.pipe';
 
 
 
@@ -20,7 +21,8 @@ import { MessageDialogComponent } from './dialogs/message-dialog/message-dialog.
     LeadingZerosPipe,
     UserPipe,
     BooleanPipe,
-    MessageDialogComponent
+    MessageDialogComponent,
+    CoursesPipe
   ],
   providers: [
     NgbModalConfig
@@ -36,7 +38,8 @@ import { MessageDialogComponent } from './dialogs/message-dialog/message-dialog.
     FieldErrorDisplayComponent,
     LeadingZerosPipe,
     UserPipe,
-    BooleanPipe
+    BooleanPipe,
+    CoursesPipe
   ],
   entryComponents: [
     ConfirmationDialogComponent,

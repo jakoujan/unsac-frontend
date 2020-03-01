@@ -34,7 +34,7 @@ export class UserFormComponent implements OnInit {
 
     if (this.user) {
       this.generalDataForm = this.fb.group({
-        user: [this.user.user, Validators.required, validateName(this.userService)],
+        user: [this.user.username, Validators.required, validateName(this.userService)],
         name: [this.user.name, Validators.required],
         email: [this.user.email, Validators.compose([Validators.required, Validators.email])],
       });
@@ -52,7 +52,7 @@ export class UserFormComponent implements OnInit {
   }
 
   public save() {
-    this.user.user = this.generalDataForm.controls.user.value;
+    this.user.username = this.generalDataForm.controls.user.value;
     this.user.name = this.generalDataForm.controls.name.value;
     this.user.email = this.generalDataForm.controls.email.value;
     this.user.modules = buildUserPermissions(this.permissions);

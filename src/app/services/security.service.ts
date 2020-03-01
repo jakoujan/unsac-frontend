@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Service } from './service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { IResponse } from '../interfaces/response';
 import { IUser } from '../interfaces/user';
 import { ToastService } from './toast.service';
 import { PersistenceService } from 'angular-persistence';
 import { Subject, Observable } from 'rxjs';
+import { ISecureResponse } from '../interfaces/secure-response';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SecurityService extends Service {
 
-  private static LOGIN = 'api/security/login';
+  private static LOGIN = '/oauth/token';
   private static LOGOUT = 'api/security/logout';
 
   private accessorEmitter: Subject<IUser> = new Subject<IUser>();
@@ -24,15 +25,30 @@ export class SecurityService extends Service {
     super(http, persistenceService, spinner, toastService);
   }
 
-  public login(user: IUser): Promise<IResponse> {
-    return new Promise<IResponse>(resolve => {
-      this.http.post<IResponse>(Service.getApiUrl(SecurityService.LOGIN), user, this.getOptions()).subscribe(response => {
+  public login(user: IUser): Promise<ISecureResponse> {
+    this.spinner.show();
+    return new Promise<ISecureResponse>(resolve => {
+      const params = new HttpParams({
+        fromObject: {
+          grant_type: 'password',
+          username: user.username,
+          password: user.password
+        }
+      });
+
+      this.http.post<ISecureResponse>(Service.getApiUrl(SecurityService.LOGIN), params, this.getOptions()).subscribe(response => {
         this.spinner.hide();
-        resolve(response as unknown as IResponse);
+        resolve(response as unknown as ISecureResponse);
       }, err => {
         this.spinner.hide();
         this.toastService.show('Error al procesar la petición', { classname: 'bg-danger text-light', delay: 10000 });
-        const response: IResponse = {
+        const response: ISecureResponse = {
+          access_token: null,
+          expires_in: null,
+          jti: null,
+          refresh_token: null,
+          scope: null,
+          token_type: null,
           code: 505,
           fields: null,
           message: 'Error el servicio no esta disponible',

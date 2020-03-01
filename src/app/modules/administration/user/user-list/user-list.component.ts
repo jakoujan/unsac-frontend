@@ -8,6 +8,8 @@ import { IUserFilter } from 'src/app/filters/user-filter';
 import { IResposeData } from 'src/app/interfaces/response-data';
 import { DialogService } from 'src/app/components/ui/dialogs/dialog.service';
 import { constants } from 'src/environments/environment';
+import { PersistenceService, StorageType } from 'angular-persistence';
+import { Session } from 'protractor';
 
 @Component({
   selector: 'app-user-list',
@@ -30,7 +32,7 @@ export class UserListComponent implements OnInit {
     entity: {
       id: null,
       name: null,
-      user: null,
+      username: null,
       modules: null,
       email: null
     },
@@ -43,17 +45,22 @@ export class UserListComponent implements OnInit {
   hideFilter: boolean = true;
   editMovement: EMovement = EMovement.EDIT;
 
-  constructor(private modalService: NgbModal, private userService: UserService, private dialog: DialogService) { }
+  constructor(private modalService: NgbModal, private userService: UserService, private dialog: DialogService, private persistenceService: PersistenceService) { }
 
   ngOnInit() {
     this.setFilter();
+
+    const session: Session = this.persistenceService.get(constants.SESSION, StorageType.SESSION);
+    if (session) {
+      
+    }
   }
 
   public newRecord() {
     const user: IUser = {
       id: 0,
       name: null,
-      user: null,
+      username: null,
       modules: [],
       email: null
     };
@@ -78,7 +85,7 @@ export class UserListComponent implements OnInit {
 
   public delete(user: IUser) {
 
-    this.dialog.confirm(constants.CONFIRMATION_DIALOG_TITLE, 'Realmente desea eliminar a este usuario: ' + user.user + '?')
+    this.dialog.confirm(constants.CONFIRMATION_DIALOG_TITLE, 'Realmente desea eliminar a este usuario: ' + user.username + '?')
       .then((confirmed) => {
         if (confirmed) {
           this.userService.delete(user).then(response => {

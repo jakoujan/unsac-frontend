@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  API_URL: 'http://autocase.mexicocss.com/'
+  API_URL: '',
+  user: 'angularapp',
+  password: '12345'
 };
 
 export const constants = {

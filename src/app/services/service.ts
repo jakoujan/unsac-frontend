@@ -1,12 +1,11 @@
 import { environment, constants } from 'src/environments/environment';
-import { HttpHeaders, HttpClient, HttpEvent } from '@angular/common/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { PersistenceService, StorageType } from 'angular-persistence';
 import { IUser } from '../interfaces/user';
 import { Session } from '../interfaces/session';
 import { IResponse } from '../interfaces/response';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastService } from './toast.service';
-import { Observable } from 'rxjs';
 
 export class Service {
 
@@ -66,27 +65,25 @@ export class Service {
     }
 
     public getOptions(user?: IUser): any {
-        // public getOptions(): any {
-
         let headers = new HttpHeaders({
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
             'Accept': 'application/json',
-            'Access-Control-Allow-Origin': '*'
+            'Access-Control-Allow-Origin': '*',
+            'Authorization': 'Basic ' + btoa(environment.user + ':' + environment.password)
         });
 
         const session: Session = this.ps.get(constants.SESSION, StorageType.SESSION);
 
-        if (session !== undefined) {
+        if (session) {
             headers = new HttpHeaders({
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
-                'Authorization': 'Bearer ' + session.token,
                 'Access-Control-Allow-Origin': '*',
-                'XSRF-TOKEN': session.csrf
+                'Authorization': 'Bearer ' + session.token
             });
         }
 
-        if (user !== undefined) {
+        if (user) {
             headers = new HttpHeaders({
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',

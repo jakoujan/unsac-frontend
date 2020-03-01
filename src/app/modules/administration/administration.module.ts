@@ -11,6 +11,8 @@ import { UserFormComponent } from './user/user-form/user-form.component';
 import { InstructorListComponent } from './instructor/instructor-list/instructor-list.component';
 import { InstructorFormComponent } from './instructor/instructor-form/instructor-form.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CourseFormComponent } from './course/course-form/course-form.component';
+import { CourseListComponent } from './course/course-list/course-list.component';
 
 
 
@@ -21,7 +23,9 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     UserListComponent,
     UserFormComponent,
     InstructorListComponent,
-    InstructorFormComponent
+    InstructorFormComponent,
+    CourseFormComponent,
+    CourseListComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +38,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
   ],
   entryComponents: [
     CustomerFormComponent,
-    UserFormComponent
+    UserFormComponent,
+    CourseFormComponent
   ]
 })
 export class AdministrationModule { }

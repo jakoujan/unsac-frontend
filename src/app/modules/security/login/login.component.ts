@@ -9,6 +9,7 @@ import { ToastService } from 'src/app/services/toast.service';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
+import { ISecureResponse } from 'src/app/interfaces/secure-response';
 
 @Component({
   selector: 'app-login',
@@ -46,15 +47,16 @@ export class LoginComponent implements OnInit {
       api_token: null,
       id: null,
       name: null,
-      user: this.loginForm.controls.user.value,
+      username: this.loginForm.controls.user.value,
       modules: null,
+      grant_type: 'password'
     }
     this.securityService.login(user).then(response => {
       if (response.code === constants.LOGIN_OK) {
         const session: Session = {
           user: response.fields.user,
-          token: response.fields.token,
-          csrf: response.fields.csrf
+          token: response.access_token,
+          csrf: response.refresh_token
         }
         this.persistenceService.set(constants.SESSION, session, { type: StorageType.SESSION });
 

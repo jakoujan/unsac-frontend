@@ -44,11 +44,11 @@
                                         <span class="fas fa-search"></span>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Filtro" aria-label="Filtro"
+                                <input type="text" class="form-control" [(ngModel)]="ccFilter"  placeholder="Busqueda de curso" aria-label="Busqueda de curso"
                                     aria-describedby="basic-addon1">
                             </div>
                         </div>
-                        <a class="list-group-item list-group-item-action" *ngFor="let item of cc"
+                        <a class="list-group-item list-group-item-action" *ngFor="let item of ccc"
                             cdkDrag>{{ item.title }}</a>
                     </div>
                 </div>
@@ -63,11 +63,11 @@
                                         <span class="fas fa-search"></span>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Filtro" aria-label="Filtro"
+                                <input type="text" class="form-control" [(ngModel)]="acFilter" placeholder="Busqueda de curso" aria-label="Busqueda de curso"
                                     aria-describedby="basic-addon1">
                             </div>
                         </div>
-                        <a class="list-group-item list-group-item-action" *ngFor="let item of ac"
+                        <a class="list-group-item list-group-item-action" *ngFor="let item of acc"
                             cdkDrag>{{ item.title }}</a>
                     </div>
                 </div>

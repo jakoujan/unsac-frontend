@@ -1,0 +1,14 @@
+{
+  "/oauth": {
+    "target": "http://31.220.63.183:8014",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/api": {
+    "target": "http://31.220.63.183:8014",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}
