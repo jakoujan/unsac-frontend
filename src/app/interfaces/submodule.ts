@@ -1,6 +1,6 @@
 import { Item } from './item';
 
 export interface ISubmodule {
-    id: string;
+    id: number;
     write: boolean;
 }

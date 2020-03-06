@@ -3,6 +3,7 @@ import { IInstructor } from 'src/app/interfaces/instructor';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { CourseService } from 'src/app/services/course.service';
 @Component({
   selector: 'app-instructor-form',
   templateUrl: './instructor-form.component.html',
@@ -18,33 +19,22 @@ export class InstructorFormComponent implements OnInit {
   ccFilter: string = '';
   acFilter: string = '';
 
-  cc = [
-    { id: 1, title: 'Curso 1' },
-    { id: 2, title: 'Curso 2' },
-    { id: 5, title: 'Curso 5' },
-    { id: 6, title: 'Curso 6' }
-  ];
+  cc = [];
 
-  ac = [
-    { id: 3, title: 'Curso 3' },
-    { id: 4, title: 'Curso 4' },
-    { id: 7, title: 'Curso 7' },
-    { id: 8, title: 'Curso 8' },
-    { id: 9, title: 'Curso 9' },
-    { id: 10, title: 'Curso 10' },
-    { id: 11, title: 'Curso 11' },
-    { id: 12, title: 'Curso 12' },
-    { id: 13, title: 'Curso 13' },
-    { id: 14, title: 'Curso 14' }
-  ];
+  ac = [];
 
-  constructor(public activeModal: NgbActiveModal, private fb: FormBuilder) { }
+  constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private courseService: CourseService) { }
 
   ngOnInit() {
     if (this.instructor) {
+      this.courseService.actives().then(response => {
+        this.ac = response.fields.data.filter(c => this.instructor.courses.filter(cf => cf.id === c.id).length === 0);
+      });
+      this.cc = this.instructor.courses;
       this.generalDataForm = this.fb.group({
         name: [this.instructor.name, Validators.required],
         email: [this.instructor.email, Validators.compose([Validators.required, Validators.email])],
+        telephone: [this.instructor.telephone, Validators.required],
       });
       this.form = this.fb.group({
         generalData: this.generalDataForm,
@@ -55,8 +45,9 @@ export class InstructorFormComponent implements OnInit {
   }
 
   public save() {
-    this.instructor.name = this.generalDataForm.controls.business_name.value;
+    this.instructor.name = this.generalDataForm.controls.name.value;
     this.instructor.email = this.generalDataForm.controls.email.value;
+    this.instructor.telephone = this.generalDataForm.controls.telephone.value;
     this.activeModal.close(this.instructor);
   }
 

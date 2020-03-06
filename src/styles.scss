@@ -1,6 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:300,400,600,700&display=swap');
+@import "./assets/css/variables";
 html {
     height: 100%;
+}
+
+.bg-primary-blue {
+    background-color: $blue;
 }
 
 body {

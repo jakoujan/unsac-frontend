@@ -7,6 +7,12 @@ import { IResponse } from '../interfaces/response';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastService } from './toast.service';
 
+export enum ContentType {
+    FORM_URLENCODED,
+    JSON,
+    XML
+}
+
 export class Service {
 
     protected static ERROR_NO_URL_DEFINED = 'URL no definida';
@@ -64,14 +70,26 @@ export class Service {
         return session.user.api_token;
     }
 
-    public getOptions(user?: IUser): any {
-        let headers = new HttpHeaders({
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Accept': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Authorization': 'Basic ' + btoa(environment.user + ':' + environment.password)
-        });
+    public getOptions(user?: IUser, type?: ContentType): any {
+        let headers = null;
 
+        if (type === ContentType.FORM_URLENCODED) {
+            headers = new HttpHeaders({
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Accept': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Authorization': 'Basic ' + btoa(environment.user + ':' + environment.password)
+            });
+        }
+
+        if (type === ContentType.JSON) {
+            headers = new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Authorization': 'Basic ' + btoa(environment.user + ':' + environment.password)
+            });
+        }
         const session: Session = this.ps.get(constants.SESSION, StorageType.SESSION);
 
         if (session) {
@@ -117,6 +135,26 @@ export class Service {
                 });
         });
     }
+    protected preparePromiseEntityPut(uri: string, entity: any, params?: any): Promise<IResponse> {
+        this.spinner.show();
+        return new Promise<IResponse>(resolve => {
+            this.http.put<IResponse>(Service.getApiUrl(uri, params),
+                Service.prepareEntity(entity), this.getOptions()).subscribe(response => {
+                    this.spinner.hide();
+                    resolve(response as unknown as IResponse);
+                }, err => {
+                    this.spinner.hide();
+                    this.toastService.show('Error al procesar la petición', { classname: 'bg-warning text-light', delay: 10000 });
+                    const response: IResponse = {
+                        code: 505,
+                        fields: null,
+                        message: 'Error el servicio no esta disponible',
+                        status: ''
+                    }
+                    resolve(response);
+                });
+        });
+    }
 
     protected preparePromiseFilterPost(uri: string, entity: any, params?: any): Promise<IResponse> {
         this.spinner.show();
@@ -136,6 +174,24 @@ export class Service {
                     }
                     resolve(response);
                 });
+        });
+    }
+
+    protected preparePromiseGet(uri: string, params?: any): Promise<IResponse> {
+        return new Promise<IResponse>(resolve => {
+            this.http.get<IResponse>(Service.getApiUrl(uri, params), this.getOptions()).subscribe(response => {
+                this.spinner.hide();
+                resolve(response as unknown as IResponse);
+            }, err => {
+                this.toastService.show('Error al procesar la petición', { classname: 'bg-warning text-light', delay: 10000 });
+                const response: IResponse = {
+                    code: 505,
+                    fields: null,
+                    message: 'Error el servicio no esta disponible',
+                    status: ''
+                }
+                resolve(response);
+            });
         });
     }
 

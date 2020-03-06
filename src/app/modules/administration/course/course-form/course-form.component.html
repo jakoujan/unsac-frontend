@@ -1,1 +1,26 @@
-<p>course-form works!</p>
+<div class="modal-header text-light bg-dark">
+    <p class="modal-title">Datos del curso</p>
+</div>
+<div class="modal-body">
+    <div class="card">
+        <div class="card-header">
+            Datos generales
+        </div>
+        <div class="card-body">
+            <form [formGroup]="generalDataForm">
+                <div class="form-row">
+                    <div class="form-group col-12">
+                        <label for="business_name">Titulo</label>
+                        <input type="text" class="form-control" name="title" formControlName="title"
+                            [ngClass]="{'is-invalid': generalDataForm.get('title').invalid && generalDataForm.get('title').touched}">
+                        <field-error-display [control]="generalDataForm.get('title')"></field-error-display>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-sm btn-success" [disabled]="form.invalid" (click)="save()">Guardar</button>
+    <button type="button" class="btn btn-sm btn-secondary" (click)="activeModal.dismiss()">Cancelar</button>
+</div>

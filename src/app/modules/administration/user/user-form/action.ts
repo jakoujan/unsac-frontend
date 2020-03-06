@@ -1,5 +1,5 @@
 export interface Action {
-    id: string;
+    id: number;
     name: string;
     access: boolean;
     write: boolean;

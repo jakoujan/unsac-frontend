@@ -9,19 +9,28 @@
         <div class="card-body">
             <form [formGroup]="generalDataForm">
                 <div class="form-row">
-                    <div class="form-group col-12">
+                    <div class="form-group col-6">
                         <label for="business_name">Razón social</label>
                         <input type="text" class="form-control" name="business_name" formControlName="business_name"
                             [ngClass]="{'is-invalid': generalDataForm.get('business_name').invalid && generalDataForm.get('business_name').touched}">
                         <field-error-display [control]="generalDataForm.get('business_name')"></field-error-display>
                     </div>
-                </div>
-                <div class="form-row">
                     <div class="form-group col-6">
                         <label for="tax_id">R.F.C.</label>
                         <input type="text" class="form-control" name="tax_id" formControlName="tax_id"
                             [ngClass]="{'is-invalid': generalDataForm.get('tax_id').invalid && generalDataForm.get('tax_id').touched}">
                         <field-error-display [control]="generalDataForm.get('tax_id')"></field-error-display>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-6">
+                        <label for="region">Region</label>
+                        <select name="region" class="form-control" formControlName="region"
+                            [ngClass]="{'is-invalid': generalDataForm.get('region').invalid && generalDataForm.get('region').touched}">
+                            <option [ngValue]="region.id" *ngFor="let region of regions">{{ region.name }}
+                            </option>
+                        </select>
+                        <field-error-display [control]="generalDataForm.get('region')"></field-error-display>
                     </div>
                     <div class="form-group col-6">
                         <label for="inputPassword">Contacto</label>
@@ -114,7 +123,8 @@
                         <label for="country">Pais</label>
                         <select name="country" class="form-control" formControlName="country"
                             [ngClass]="{'is-invalid': addressForm.get('country').invalid && addressForm.get('country').touched}">
-                            <option [ngValue]="country.id" *ngFor="let country of countries">{{country.description}}</option>
+                            <option [ngValue]="country.id" *ngFor="let country of countries">{{country.description}}
+                            </option>
                         </select>
                         <field-error-display [control]="addressForm.get('country')"></field-error-display>
                     </div>

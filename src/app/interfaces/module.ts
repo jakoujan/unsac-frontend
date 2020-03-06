@@ -1,6 +1,6 @@
 import { ISubmodule } from './submodule';
 
 export interface IModule {
-    id: string;
+    id: number;
     submodules: Array<ISubmodule>;
 }

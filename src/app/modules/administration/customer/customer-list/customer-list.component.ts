@@ -43,7 +43,7 @@ export class CustomerListComponent implements OnInit {
       state: null,
       postal_code: null,
       country: null,
-      status: null,
+      region: null,
     },
     startDate: null,
     endDate: null,
@@ -77,7 +77,7 @@ export class CustomerListComponent implements OnInit {
       state: null,
       postal_code: null,
       country: null,
-      status: 99,
+      region: null
     };
 
     this.openForm(customer, EMovement.NEW);

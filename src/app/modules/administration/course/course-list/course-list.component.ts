@@ -72,7 +72,7 @@ export class CourseListComponent implements OnInit {
 
   public delete(course: ICourse) {
 
-    this.dialog.confirm(constants.CONFIRMATION_DIALOG_TITLE, 'Realmente desea eliminar a este usuario: ' + course + '?')
+    this.dialog.confirm(constants.CONFIRMATION_DIALOG_TITLE, 'Realmente desea eliminar este curso: ' + course.title + '?')
       .then((confirmed) => {
         if (confirmed) {
           this.courseService.delete(course).then(response => {
@@ -90,13 +90,13 @@ export class CourseListComponent implements OnInit {
   public openForm(course: ICourse, movement: EMovement) {
     const modalRef = this.modalService.open(CourseFormComponent, { size: 'xl', centered: true, scrollable: true });
     modalRef.componentInstance.course = course;
-    modalRef.result.then(usr => {
+    modalRef.result.then(crs => {
       this.courseService.save(course).then(response => {
         if (movement === EMovement.NEW) {
-          this.response.data.push(usr);
-          this.dialog.show(constants.CONFIRMATION_DIALOG_TITLE, response.message + ' Password de acceso: ' + response.fields.password);
+          this.response.data.push(crs);
+          this.dialog.show(constants.CONFIRMATION_DIALOG_TITLE, response.message);
         } else if (movement === EMovement.EDIT) {
-          course = usr;
+          course = crs;
           this.dialog.show(constants.CONFIRMATION_DIALOG_TITLE, response.message);
         }
       });

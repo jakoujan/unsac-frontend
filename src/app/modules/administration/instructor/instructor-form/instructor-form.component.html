@@ -24,6 +24,14 @@
                         <field-error-display [control]="generalDataForm.get('email')"></field-error-display>
                     </div>
                 </div>
+                <div class="form-row">
+                    <div class="form-group col-12">
+                        <label for="inputPassword">Teléfono</label>
+                        <input type="input" class="form-control" name="telephone" formControlName="telephone"
+                            [ngClass]="{'is-invalid': generalDataForm.get('telephone').invalid && generalDataForm.get('telephone').touched}">
+                        <field-error-display [control]="generalDataForm.get('telephone')"></field-error-display>
+                    </div>
+                </div>
             </form>
         </div>
     </div>

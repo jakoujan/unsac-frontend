@@ -1,3 +1,5 @@
+import { IRegion } from './region';
+
 export interface ICustomer {
     id: number;
     business_name: string;
@@ -14,5 +16,5 @@ export interface ICustomer {
     state: number;
     postal_code: string;
     country: number;
-    status: number;
+    region: IRegion;
 }

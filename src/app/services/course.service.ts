@@ -14,6 +14,7 @@ import { ICourse } from '../interfaces/course';
 export class CourseService extends Service {
 
   private static COURSE_LIST = 'api/courses/list';
+  private static COURSE_ACTIVES = 'api/courses/actives';
   private static COURSE_SAVE = '/api/courses/save';
   private static COURSE_DELETE = '/api/courses/delete';
 
@@ -29,6 +30,10 @@ export class CourseService extends Service {
       value: filter.page
     }];
     return this.preparePromiseFilterPost(CourseService.COURSE_LIST, filter, params);
+  }
+
+  public actives(): Promise<IResponse> {
+    return this.preparePromiseGet(CourseService.COURSE_ACTIVES);
   }
 
   public save(course: ICourse): Promise<IResponse> {

@@ -4,11 +4,11 @@ export const MODULES: Array<Module> = [
   {
     title: 'Agenda',
     icon: 'fas fa-fw fa-sliders-h',
-    id: 'schedule',
+    id: 1,
     submodules: [
       {
         name: 'Asignación',
-        id: 'assignment',
+        id: 1,
         uri: 'assignment',
         icon: 'fas fa-fw fa-user-tie',
         default: true,
@@ -16,7 +16,7 @@ export const MODULES: Array<Module> = [
       },
       {
         name: 'Modificación',
-        id: 'edit-assignment',
+        id: 2,
         uri: 'assignment/edit',
         icon: 'fas fa-fw fa-user',
         default: false,
@@ -24,7 +24,7 @@ export const MODULES: Array<Module> = [
       },
       {
         name: 'Logistica',
-        id: 'logistic',
+        id: 3,
         uri: 'assignment/logistic',
         icon: 'fas fa-fw fa-user',
         default: false,
@@ -36,11 +36,11 @@ export const MODULES: Array<Module> = [
   {
     title: 'Administración',
     icon: 'fas fa-fw fa-sliders-h',
-    id: 'administration',
+    id: 2,
     submodules: [
       {
         name: 'Clientes',
-        id: 'customers',
+        id: 4,
         uri: 'administration/customers',
         icon: 'fas fa-fw fa-user-tie',
         default: true,
@@ -48,7 +48,7 @@ export const MODULES: Array<Module> = [
       },
       {
         name: 'Usuarios',
-        id: 'users',
+        id: 5,
         uri: 'administration/users',
         icon: 'fas fa-fw fa-user',
         default: false,
@@ -56,7 +56,7 @@ export const MODULES: Array<Module> = [
       },
       {
         name: 'Instructores',
-        id: 'instructors',
+        id: 6,
         uri: 'administration/instructors',
         icon: 'fas fa-fw fa-user',
         default: false,
@@ -64,7 +64,7 @@ export const MODULES: Array<Module> = [
       },
       {
         name: 'Cursos',
-        id: 'courses',
+        id: 7,
         uri: 'administration/courses',
         icon: 'fas fa-fw fa-user',
         default: false,

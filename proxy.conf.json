@@ -5,7 +5,7 @@
     "logLevel": "debug",
     "changeOrigin": true
   },
-  "/api": {
+  "/crud": {
     "target": "http://31.220.63.183:8014",
     "secure": false,
     "logLevel": "debug",

@@ -4,9 +4,9 @@ export interface IUser {
     id: number;
     name: string;
     username: string;
-    modules: Array<IModule>;
     email: string;
     password?: string;
+    modules: Array<IModule>;
     api_token?: string;
     grant_type?: string;
 }

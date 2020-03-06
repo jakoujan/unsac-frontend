@@ -14,7 +14,8 @@ import { IInstructor } from '../interfaces/instructor';
 export class InstructorService extends Service {
 
   private static INSTRUCTOR_LIST = 'api/instructors/list';
-  private static INSTRUCTOR_SAVE = '/api/instructors/save';
+  private static INSTRUCTOR_SAVE = '/api/instructors';
+  private static INSTRUCTOR_UPDATE = '/api/instructors/';
   private static INSTRUCTOR_DELETE = '/api/instructors/delete';
 
 
@@ -34,6 +35,11 @@ export class InstructorService extends Service {
   public save(instructor: IInstructor): Promise<IResponse> {
     return this.preparePromiseEntityPost(InstructorService.INSTRUCTOR_SAVE, instructor);
   }
+
+  public update(instructor: IInstructor): Promise<IResponse> {
+    return this.preparePromiseEntityPut(InstructorService.INSTRUCTOR_UPDATE + instructor.id, instructor);
+  }
+
 
   public delete(instructor: IInstructor): Promise<IResponse> {
     return this.preparePromiseEntityPost(InstructorService.INSTRUCTOR_DELETE, instructor);

@@ -1,4 +1,5 @@
 import { Item } from '../interfaces/item';
+import { IRegion } from '../interfaces/region';
 
 export class Catalog {
 
@@ -41,4 +42,11 @@ export const STATES: Array<Item> = [
 
 export const COUNTRIES: Array<Item> = [
     { id: 52, description: 'México' }
+];
+
+export const REGION: Array<IRegion> = [
+    { id: 1, name: 'Querétaro' },
+    { id: 2, name: 'León' },
+    { id: 3, name: 'San Luis Potosí' },
+    { id: 4, name: 'Monterrey' }
 ]

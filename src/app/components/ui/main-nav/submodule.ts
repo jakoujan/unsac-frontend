@@ -1,6 +1,6 @@
 export interface Submodule {
     name: string;
-    id: string;
+    id: number;
     uri: string;
     icon: string;
     default: boolean;

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Service } from './service';
+import { Service, ContentType } from './service';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { IResponse } from '../interfaces/response';
@@ -25,18 +25,26 @@ export class SecurityService extends Service {
     super(http, persistenceService, spinner, toastService);
   }
 
-  public login(user: IUser): Promise<ISecureResponse> {
+  public login(user: IUser, type: ContentType): Promise<ISecureResponse> {
     this.spinner.show();
     return new Promise<ISecureResponse>(resolve => {
-      const params = new HttpParams({
-        fromObject: {
-          grant_type: 'password',
+      let body;
+      if (type === ContentType.FORM_URLENCODED) {
+        body = new HttpParams({
+          fromObject: {
+            grant_type: 'password',
+            username: user.username,
+            password: user.password
+          }
+        });
+      } else if (type === ContentType.JSON) {
+        body = {
           username: user.username,
           password: user.password
         }
-      });
+      }
 
-      this.http.post<ISecureResponse>(Service.getApiUrl(SecurityService.LOGIN), params, this.getOptions()).subscribe(response => {
+      this.http.post<ISecureResponse>(Service.getApiUrl(SecurityService.LOGIN), body, this.getOptions(undefined, type)).subscribe(response => {
         this.spinner.hide();
         resolve(response as unknown as ISecureResponse);
       }, err => {

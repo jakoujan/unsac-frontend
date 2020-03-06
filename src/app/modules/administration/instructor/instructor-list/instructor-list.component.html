@@ -40,6 +40,7 @@
                         <tr>
                             <th scope="col">Nombre</th>
                             <th scope="col">Correo electrónico</th>
+                            <th scope="col">Teléfono</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
@@ -47,6 +48,7 @@
                         <tr *ngFor="let instructor of response.data">
                             <th scope="row">{{ instructor.name }}</th>
                             <td>{{ instructor.email }}</td>
+                            <td>{{ instructor.telephone }}</td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Acciones">
                                     <button class="btn btn-sm btn-primary" (click)="openForm(instructor, editMovement)"><span

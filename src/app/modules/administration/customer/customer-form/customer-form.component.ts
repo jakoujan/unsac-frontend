@@ -3,7 +3,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ICustomer } from 'src/app/interfaces/customer';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Item } from 'src/app/interfaces/item';
-import { STATES, COUNTRIES } from 'src/app/catalogs/catalogs';
+import { STATES, COUNTRIES, REGION } from 'src/app/catalogs/catalogs';
+import { IRegion } from 'src/app/interfaces/region';
 @Component({
   selector: 'app-customer-form',
   templateUrl: './customer-form.component.html',
@@ -18,6 +19,7 @@ export class CustomerFormComponent implements OnInit {
   addressForm: FormGroup;
   states: Array<Item> = STATES;
   countries: Array<Item> = COUNTRIES;
+  regions: Array<IRegion> = REGION;
 
 
   constructor(public activeModal: NgbActiveModal, private fb: FormBuilder) { }
@@ -28,6 +30,7 @@ export class CustomerFormComponent implements OnInit {
         business_name: [this.customer.business_name, Validators.required],
         telephone: [this.customer.telephone, Validators.required],
         contact: [this.customer.contact, Validators.required],
+        region: [this.customer.region, Validators.required],
         email: [this.customer.email, Validators.compose([Validators.required, Validators.email])],
         tax_id: [this.customer.tax_id, Validators.required]
       });

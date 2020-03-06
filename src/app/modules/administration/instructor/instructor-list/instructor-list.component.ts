@@ -31,7 +31,8 @@ export class InstructorListComponent implements OnInit {
       id: null,
       name: null,
       email: null,
-      courses: null
+      courses: null,
+      telephone: null,
     },
     startDate: null,
     endDate: null,
@@ -53,7 +54,8 @@ export class InstructorListComponent implements OnInit {
       id: 0,
       name: null,
       email: null, 
-      courses: []
+      courses: [],
+      telephone: null
     };
 
     this.openForm(instructor, EMovement.NEW);
