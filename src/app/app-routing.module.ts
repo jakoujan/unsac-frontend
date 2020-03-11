@@ -15,37 +15,37 @@ const routes: Routes = [
   {
     path: 'dashboard', component: DashboardComponent, canActivate: [SessionGuard], data: {
       validate: false,
-      module: 'main',
-      id: 'dashboard'
+      module: 1,
+      id: 0
     }
   },
   {
     path: 'administration/customers', component: CustomerListComponent, canActivate: [SessionGuard], data: {
       validate: true,
-      module: 'administration',
-      id: 'customers'
+      module: 1,
+      id: 4
     }
   },
   {
     path: 'administration/users', component: UserListComponent, canActivate: [SessionGuard], data: {
       validate: true,
-      module: 'administration',
-      id: 'users'
+      module: 1,
+      id: 5
     }
   },
   {
     path: 'administration/instructors', component: InstructorListComponent, canActivate: [SessionGuard], data: {
       validate: true,
-      module: 'administration',
-      id: 'instructors'
+      module: 1,
+      id: 6
     }
   }
   ,
   {
     path: 'administration/courses', component: CourseListComponent, canActivate: [SessionGuard], data: {
       validate: true,
-      module: 'administration',
-      id: 'courses'
+      module: 1,
+      id: 7
     }
   }
 ];

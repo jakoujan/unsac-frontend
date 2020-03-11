@@ -4,7 +4,7 @@ export const MODULES: Array<Module> = [
   {
     title: 'Agenda',
     icon: 'fas fa-fw fa-sliders-h',
-    id: 1,
+    id: 2,
     submodules: [
       {
         name: 'Asignación',
@@ -36,7 +36,7 @@ export const MODULES: Array<Module> = [
   {
     title: 'Administración',
     icon: 'fas fa-fw fa-sliders-h',
-    id: 2,
+    id: 1,
     submodules: [
       {
         name: 'Clientes',

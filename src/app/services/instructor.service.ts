@@ -13,7 +13,7 @@ import { IInstructor } from '../interfaces/instructor';
 })
 export class InstructorService extends Service {
 
-  private static INSTRUCTOR_LIST = 'api/instructors/list';
+  private static INSTRUCTOR_LIST = 'crud/instructores';
   private static INSTRUCTOR_SAVE = '/api/instructors';
   private static INSTRUCTOR_UPDATE = '/api/instructors/';
   private static INSTRUCTOR_DELETE = '/api/instructors/delete';
